@@ -22,6 +22,8 @@ from graphite.metrics.search import searcher
 from graphite.carbonlink import CarbonLink
 import fnmatch, os
 
+import urllib
+
 try:
   import cPickle as pickle
 except ImportError:
@@ -145,7 +147,7 @@ def find_view(request):
   elif format == 'completer':
     results = []
     for node in matches:
-      node_info = dict(path=node.path, name=node.name, is_leaf=str(int(node.is_leaf)))
+      node_info = dict(path=node.path, name=urllib.unquote(node.name.encode('utf8')), is_leaf=str(int(node.is_leaf)))
       if not node.is_leaf:
         node_info['path'] += '.'
       results.append(node_info)
@@ -280,7 +282,7 @@ def tree_json(nodes, base_path, wildcards=False):
 
     found.add(node.name)
     resultNode = {
-      'text' : str(node.name),
+      'text' : urllib.unquote(node.name.encode('utf8')),
       'id' : base_path + str(node.name),
     }
 

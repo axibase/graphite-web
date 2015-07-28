@@ -278,7 +278,7 @@ function initDashboard () {
           menuDisabled: true
         },
         columns: [
-          {header: 'Metric Path', width: 1.0, dataIndex: 'path'}
+          {header: 'Metric Path', width: 1.0, dataIndex: 'name'}
         ]
       }),
       viewConfig: {
@@ -307,7 +307,7 @@ function initDashboard () {
           format: 'completer',
           automatic_variants: (UI_CONFIG.automatic_variants) ? '1' : '0'
         },
-        fields: ['path', 'is_leaf'],
+        fields: ['path', 'is_leaf', 'name'],
         root: 'metrics'
       }),
       listeners: {
@@ -960,6 +960,7 @@ function graphAreaToggle(target, options) {
   } else {
     graphTargetString = "target=" + target;
   }
+  graphTargetString = encodeURI(graphTargetString);
   var graphTargetList = Ext.urlDecode(graphTargetString)['target'];
   if (typeof graphTargetList == 'string') {
     graphTargetList = [graphTargetList];

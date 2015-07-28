@@ -13,6 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License."""
 import csv
 import math
+import urllib
 import pytz
 from datetime import datetime
 from time import time
@@ -110,6 +111,8 @@ def renderView(request):
           continue
         t = time()
         seriesList = evaluateTarget(requestContext, target)
+        for series_ in seriesList:
+          series_.name = urllib.unquote(series_.name.encode('utf8'))
         log.rendering("Retrieval of %s took %.6f" % (target, time() - t))
         data.extend(seriesList)
 
