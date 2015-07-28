@@ -42,8 +42,7 @@ limitations under the License. -->
       }
 
       function addTarget(target) {
-        var label = decodeURIComponent(target);
-        TargetStore.add([ new TargetRecord({value: target, label: label}) ]);
+        TargetStore.add([ new TargetRecord({value: target}) ]);
       }
 
       function removeTarget(target) {
@@ -77,6 +76,7 @@ limitations under the License. -->
     <script type="text/javascript" src="{% static "js/composer_widgets.js" %}"></script>
     <script type="text/javascript" src="{% static "js/composer.js" %}"></script>
     <script type="text/javascript" src="{% static "js/completer.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/atsd_composer_patch.js" %}"></script>
 
     <style type="text/css">
     /* Hack to fix this bug http://extjs.net/forum/showthread.php?s=a570aba1bf2fc67a2287684c5d91c662&t=74230 */
