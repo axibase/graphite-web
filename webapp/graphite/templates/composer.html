@@ -42,7 +42,8 @@ limitations under the License. -->
       }
 
       function addTarget(target) {
-        TargetStore.add([ new TargetRecord({value: target}) ]);
+        var label = decodeURIComponent(target);
+        TargetStore.add([ new TargetRecord({value: target, label: label}) ]);
       }
 
       function removeTarget(target) {
