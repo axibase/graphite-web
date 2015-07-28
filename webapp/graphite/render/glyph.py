@@ -13,6 +13,8 @@ See the License for the specific language governing permissions and
 limitations under the License."""
 
 import math, itertools, re
+import urllib
+
 try:
     import cairo
 except ImportError:
@@ -300,6 +302,7 @@ class Graph:
   def drawTitle(self,text):
     self.encodeHeader('title')
 
+    text = urllib.unquote(text.encode('utf8'))
     y = self.area['ymin']
     x = self.width / 2
     lineHeight = self.getExtents()['maxHeight']
