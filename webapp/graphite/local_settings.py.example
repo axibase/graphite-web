@@ -25,5 +25,67 @@ STORAGE_FINDERS = (
 ATSD_CONF = {
     'url': 'localhost:8088',
     'username': 'atsd_username',
-    'password': 'secret_pwd'
+    'password': 'secret_pwd',
+    'views': {'ATSD Host': [{'type': 'metric folder',
+                             'value': [{'jvm_*'    : 'jvm'},
+                                       {'message_*': 'message'},
+                                       {'metric_*' : 'metric'},
+                                       {'propert*' : 'properties'}],
+                             'global': [{'type': 'entity',
+                                         'value': ['atsd']},
+                                        {'type': 'period',
+                                         'value': [{'count': 1,
+                                                    'unit': 'hour'}]},
+                                        {'type': 'interval',
+                                         'value': [{'count': 1,
+                                                    'unit': 'day',
+                                                    'label': '1 day'}]}]},
+
+                            {'type': 'metric',
+                             'value': ['*']},
+
+                            {'type': 'tag',
+                             'value': ['host']},
+
+                            {'type': 'collection',
+                             'value': [{'type': 'aggregator',
+                                        'value': [{'detail': 'Detail'}],
+                                        'is leaf': True},
+
+                                       {'type': 'const',
+                                        'value': ['Aggregate']}],
+                             'global': []},
+
+                            {'type': 'aggregator',
+                             'value': [{'min'          : 'Minimum'},
+                                       {'max'          : 'Maximum'},
+                                       {'median'       : 'Median'},
+                                       {'sum'          : 'Sum'}],
+                             'is leaf': True}],
+
+              'ATSD Java': [{'type': 'metric folder',
+                             'value': [{'java_*': 'java'}],
+                             'global': [{'type': 'entity',
+                                         'value': ['atsd']},
+                                        {'type': 'period',
+                                         'value': [{'count': 1,
+                                                    'unit': 'hour'}]},
+                                        {'type': 'interval',
+                                         'value': [{'count': 1,
+                                                    'unit': 'day',
+                                                    'label': '1 day'}]}]},
+
+                            {'type': 'metric',
+                             'value': ['*']},
+
+                            {'type': 'tag',
+                             'value': ['host']},
+
+                            {'type': 'tag',
+                             'value': ['name']},
+
+                            {'type': 'aggregator',
+                             'value': [{'detail': 'Detail'}],
+                             'is leaf': True}]}
 }
+
